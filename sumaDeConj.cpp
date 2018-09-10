@@ -55,6 +55,22 @@ void backtracking(int a,int n, int v, vector <int>& valores, vector <int>& resul
 }
 
 
+void fuerzaBruta(int a,int n, int v, vector <int>& valores, vector <int>& resultado){
+	    if( a == n)
+	    {
+	    	int aux = -2;
+	    	if(sumaDeVec(resultado) == v) aux = resultado.size();
+	    	if(aux < resMin) resMin = resultado.size();
+	    }
+	    else
+	    {
+			resultado.push_back(valores[a]);
+			backtracking(a+1, n, v, valores, resultado); // recursion con el elemento
+			resultado.pop_back();
+			backtracking(a+1,n, v, valores, resultado); // recursion sin el elemento
+		}    
+}
+
 
 int main (){
 	int n;
@@ -75,7 +91,7 @@ int main (){
 		aux--;
 	}
 	//high_resolution_clock::time_point t1 = high_resolution_clock::now();
-	backtracking(0, n, v, valores, resultado);
+	fuerzaBruta(0, n, v, valores, resultado);
 	//high_resolution_clock::time_point t2 = high_resolution_clock::now();
 
 	//duration<double> time_span = duration_cast<duration<double>>(t2 - t1);
