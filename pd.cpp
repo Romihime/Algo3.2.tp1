@@ -11,6 +11,8 @@
 #include <chrono>
 using namespace std;
 using namespace std::chrono;
+#define INF 999
+
 /*
 int tiempo;*
 */
@@ -39,37 +41,37 @@ int main (){
 	f[0][0] = 0;
 
 	for (int i = 1; i <= v; i++){
-		f[0][i] = 999;
+		f[0][i] = INF;
 	}
 
 
 
-	for (int i = 1; i <= n; i++){
+	for (int i = 1; i <= n; i++){ // bottom up
 
 		for (int t = 0; t <= v; t++){
 
-			if (valores[i] > v){
+			if (valores[i-1] > v){
 
 				f[i][t] = f[i-1][t];
 			}
 			else{
 
-				f[i][t] = min(f[i-1][t], 1 + f[i-1][t - valores[i]]);
+				f[i][t] = min(f[i-1][t], 1 + f[i-1][t - valores[i-1]]);
 			}
 		}
 	}
 
-
 	for(int i =0; i <=n;i++){
 		for(int j= 0; j<=v; j++ ){
-			cout << f[i][j] << " ";
+			cout << f[i][j] << " "; // esto es para chekear que hay dentro de la matriz
 		}
 		cout << endl;
 	}
 
-
-
-
+	if (f[n][v] == INF){
+		cout << "El res es " << -1 << endl;
+		return -1; // si la ultima posicion de la matriz no alcanza a tener un valor menor a infinito, entonces no existe res valido
+	} 
 
 	cout << "El res es " << f[n][v] << endl;
 	return f[n][v];

@@ -18,19 +18,19 @@ int resMin = -1;
 
 
 
-int sumaDeVec(vector <int> entry){
+int sumaDeVec(vector <int>& entry){
 	int i = 0;
 	int res = 0;
 	while(i < entry.size()){
 		res = res + entry[i];
 		i++;
 	}
-	cout << "El vector suma " << res << endl;
+	//cout << "El vector suma " << res << endl;
 	return res;
 }
 
 
-void backtracking(int a,int n, int v, vector <int> valores, vector <int> resultado){
+void backtracking(int a,int n, int v, vector <int>& valores, vector <int>& resultado){
 	if (resultado.size() < resMin) // poda de mejor resultado ya encontrado
 	{
 		int c = sumaDeVec(resultado);
@@ -48,7 +48,7 @@ void backtracking(int a,int n, int v, vector <int> valores, vector <int> resulta
 				backtracking(a+1, n, v, valores, resultado); // recursion con el elemento
 				resultado.pop_back();
 				}
-				backtracking(a+1,n, v, valores, resultado);
+				backtracking(a+1,n, v, valores, resultado); // recursion sin el elemento
 			}
 		}
 	}    
