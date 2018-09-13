@@ -27,29 +27,19 @@ int sumaDeVec(vector <int>& entry){
 	return res;
 }
 
-
-void backtracking(int a,int n, int v, vector <int>& valores, vector <int>& resultado){
-	if (resultado.size() < resMin) // poda de mejor resultado ya encontrado
-	{
-		int c = sumaDeVec(resultado);
-	    if( c == v)
+void fuerzaBruta(int a,int n, int v, vector <int>& valores, vector <int>& resultado){
+	    if( a == n)
 	    {
-	    	if(resMin == -1) resMin = resultado.size();
-			if(resultado.size() < resMin) resMin = resultado.size();
+	    	if(resMin == -1 && sumaDeVec(resultado) == v) resMin = resultado.size();
+	    	if(sumaDeVec(resultado) == v && sumaDeVec(resultado) < resMin) resMin = resultado.size();
 	    }
 	    else
 	    {
-	    	if (a < n){
-	    		if(c + valores[a] <= v) // poda de no agrego algo que ya se pasa de v
-	    		{
-				resultado.push_back(valores[a]);
-				backtracking(a+1, n, v, valores, resultado); // recursion con el elemento
-				resultado.pop_back();
-				}
-				backtracking(a+1,n, v, valores, resultado); // recursion sin el elemento
-			}
-		}
-	}    
+			resultado.push_back(valores[a]);
+			fuerzaBruta(a+1, n, v, valores, resultado); // recursion con el elemento
+			resultado.pop_back();
+			fuerzaBruta(a+1,n, v, valores, resultado); // recursion sin el elemento
+		}    
 }
 
 
@@ -74,13 +64,13 @@ int main (){
 			aux--;
 		}
 		high_resolution_clock::time_point t1 = high_resolution_clock::now();
-		backtracking(0, n, v, valores, resultado);
+		fuerzaBruta(0, n, v, valores, resultado);
 		high_resolution_clock::time_point t2 = high_resolution_clock::now();
 
 		duration<double> time_span = duration_cast<duration<double>>(t2 - t1);
-	  	cout << time_span.count() << endl; 
+	  	//cout << time_span.count() << endl; 
 
-		//cout << "El res es " << resMin << endl;
+		cout << "El res es " << resMin << endl;
 
 		resMin = -1;
 		cin >> n;
@@ -88,3 +78,4 @@ int main (){
 	}
 	return 0;
 }
+
