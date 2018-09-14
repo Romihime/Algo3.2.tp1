@@ -9,7 +9,7 @@ int main(){
 	cin >> n;
 	cin >> v;
 	while(n!= 0 && v!= 0){
-		cout << (pow(2,n)* (n)) << endl;
+		cout << (pow(2,n))*n << endl;
 		for(int i = 0; i < n; i++){
 			int aux;
 			cin >> aux;

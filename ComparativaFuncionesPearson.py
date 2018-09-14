@@ -26,11 +26,16 @@ def bloques(valores,intervalo):
 
 df = pd.DataFrame()
 
-Teorica = datos("outcomplejbtteo")
-Experimental = datos("outcomplejbtexp")
+Teorica = datos("outcomplejpdteo")
+Experimental = datos("outcomplejpdexp")
+
+
 
 df['Teorica'] = Teorica
 df['Experimental'] = Experimental
+
+r = df.corr(method="pearson")['Teorica']['Experimental']
+print r
 
 sns.jointplot(df['Teorica'], df['Experimental'], kind="reg")
 plt.show()
