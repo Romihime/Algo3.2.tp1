@@ -40,12 +40,12 @@ void backtracking(int a,int n, int v, vector <int>& valores, vector <int>& resul
 	    else
 	    {
 	    	if (a < n){
-	    		//if(c + valores[a] <= v) // poda de no agrego algo que ya se pasa de v
-	    		//{
+	    		if(c + valores[a] <= v) // poda de no agrego algo que ya se pasa de v
+	    		{
 				resultado.push_back(valores[a]);
 				backtracking(a+1, n, v, valores, resultado); // recursion con el elemento
 				resultado.pop_back();
-				//}
+				}
 				backtracking(a+1,n, v, valores, resultado); // recursion sin el elemento
 			}
 		}
@@ -78,9 +78,11 @@ int main (){
 		high_resolution_clock::time_point t2 = high_resolution_clock::now();
 
 		duration<double> time_span = duration_cast<duration<double>>(t2 - t1);
-	  	cout << time_span.count() << endl; 
+	  	//cout << time_span.count() << endl; 
 
 		//cout << "El res es " << resMin << endl;
+
+		cout << resMin << endl;
 
 		resMin = -1;
 		cin >> n;

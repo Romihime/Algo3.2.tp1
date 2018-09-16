@@ -78,9 +78,11 @@ int main (){
 		high_resolution_clock::time_point t2 = high_resolution_clock::now();
 
 		duration<double> time_span = duration_cast<duration<double>>(t2 - t1);
-	  	cout << time_span.count() << endl; 
+	  	//cout << time_span.count() << endl; 
 
 		//cout << "El res es " << resMin << endl;
+
+		cout << resMin << endl;
 
 		resMin = -1;
 		cin >> n;
